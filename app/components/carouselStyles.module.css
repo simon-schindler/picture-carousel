@@ -1,0 +1,17 @@
+.container{
+    width: 100%;
+    overflow-x: hidden;
+}
+.pictureWrapper{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc(100dvw / 3);
+}
+.picture{
+    border: dashed 1px black;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+
+    user-select: none;
+}
