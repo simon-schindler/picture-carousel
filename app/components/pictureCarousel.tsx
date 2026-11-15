@@ -36,7 +36,6 @@ export function PictureCarousel(){
                 container.current.releasePointerCapture(e.pointerId)
             }
             drag.current = false
-            lastX = 0
         }
         
         container.current.addEventListener('pointerdown', handleDown, {signal})
@@ -69,12 +68,11 @@ export function PictureCarousel(){
             const factorB = Math.exp(-2.0*dt)
 
             //lerp
-            if(drag.current){
-                input += (dx.current - input)*factorA
-                dx.current = 0
-            }else{
+            drag.current ?
+                input += (dx.current - input)*factorA :
                 input*= factorB
-            }
+            
+            dx.current = 0
 
             x-= input
             
