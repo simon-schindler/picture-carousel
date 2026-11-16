@@ -13,10 +13,18 @@
     gap: 1vw;
 }
 .picture{
+    display: block;
     border: dashed 1px black;
     display: grid;
     place-items: center;
+   
+    user-select: none;
+}
+.picture img{
+    display: block;
+    width: 100%;
+    height: 100%;
     aspect-ratio: 1;
 
-    user-select: none;
+    pointer-events: none;
 }

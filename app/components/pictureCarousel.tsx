@@ -16,7 +16,13 @@ export function PictureCarousel(){
 
     const drag = useRef(false)
     const dx = useRef(0)
-    
+
+    const pictures=[
+        {src: '/dott.svg', alt: 'Black dott'},
+        {src: '/rect.svg', alt: 'Black rect'},
+        {src: '/triangle.svg', alt: 'Black triangle'}
+    ]
+
     useEffect(()=>{
         if(!container.current)return
         
@@ -104,20 +110,33 @@ export function PictureCarousel(){
             ref={picturesWrapper}
             className={styles.picturesWrapper}>
                 {
-                    Array.from({length:3}).map((_,i)=>(
-                        <div 
+                    pictures.map((obj,i)=>(
+                        <picture 
                         key={`a-${i}`}
                         className={styles.picture}
                         ref={i===0?picture:null}
-                        >a-{i}</div>
+                        >
+                            <source srcSet={obj.src} type="image/svg+xml"/>
+                            <img 
+                            src={obj.src}
+                            alt={obj.alt}
+                            />
+                        </picture>
                     ))
                 }
                 {
-                    Array.from({length:3}).map((_,i)=>(
-                        <div 
+                    pictures.map((obj,i)=>(
+                        <picture 
                         key={`b-${i}`}
                         className={styles.picture}
-                        >b-{i}</div>
+                        ref={i===0?picture:null}
+                        >
+                            <source srcSet={obj.src} type="image/svg+xml"/>
+                            <img 
+                            src={obj.src}
+                            alt={obj.alt}
+                            />
+                        </picture>
                     ))
                 }
             </div>
