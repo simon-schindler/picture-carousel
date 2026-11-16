@@ -3,11 +3,16 @@
 import { useEffect, useRef } from "react"
 import styles from "./carouselStyles.module.css";
 
+import { useResizeObserver } from "./useResizeObserver";
+
 export function PictureCarousel(){
     
     const rafId = useRef<number|null>(null)
     const container = useRef<HTMLDivElement|null>(null)
-    const pictureWrapper = useRef<HTMLDivElement|null>(null)
+    const picturesWrapper = useRef<HTMLDivElement|null>(null)
+    const picture = useRef<HTMLDivElement|null>(null)
+
+    const width = useResizeObserver({picture})
 
     const drag = useRef(false)
     const dx = useRef(0)
@@ -20,6 +25,7 @@ export function PictureCarousel(){
         const signal = AC.signal
         
         let lastX = 0
+
         const handleDown=(e:PointerEvent)=>{
             container.current?.setPointerCapture(e.pointerId)
             drag.current = true
@@ -47,9 +53,7 @@ export function PictureCarousel(){
     },[])
 
     useEffect(()=>{
-        if(!container.current || !pictureWrapper.current)return
-        
-        const width = pictureWrapper.current.scrollWidth / 2
+        if(!container.current || !picturesWrapper.current)return
         
         let input = 0
         let x = 0
@@ -75,9 +79,9 @@ export function PictureCarousel(){
             dx.current = 0
 
             x-= input
-            
-            const translateX = -((x % width) + width) % width // 0 bis -width
-            pictureWrapper.current!.style.transform = `translateX(${translateX}px)`
+            const w = width.current??0
+            const translateX = -((x % w) + w) % w // 0 bis -width
+            picturesWrapper.current!.style.transform = `translateX(${translateX}px)`
 
             rafId.current = requestAnimationFrame(step)
         }
@@ -96,13 +100,14 @@ export function PictureCarousel(){
         className={styles.container}
         >
             <div 
-            ref={pictureWrapper}
-            className={styles.pictureWrapper}>
+            ref={picturesWrapper}
+            className={styles.picturesWrapper}>
                 {
                     Array.from({length:3}).map((_,i)=>(
                         <div 
                         key={`a-${i}`}
                         className={styles.picture}
+                        ref={i===0?picture:null}
                         >a-{i}</div>
                     ))
                 }
