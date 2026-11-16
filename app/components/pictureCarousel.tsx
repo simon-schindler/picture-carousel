@@ -18,9 +18,9 @@ export function PictureCarousel(){
     const dx = useRef(0)
 
     const pictures=[
-        {src: '/dott.svg', alt: 'Black dott'},
-        {src: '/rect.svg', alt: 'Black rect'},
-        {src: '/triangle.svg', alt: 'Black triangle'}
+        {src: '/picture-carousel/dott.svg', alt: 'Black dott'},
+        {src: '/picture-carousel/rect.svg', alt: 'Black rect'},
+        {src: '/picture-carousel/triangle.svg', alt: 'Black triangle'}
     ]
 
     useEffect(()=>{
