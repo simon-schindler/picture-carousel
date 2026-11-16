@@ -2,6 +2,9 @@
     width: 100%;
     overflow-x: hidden;
 }
+.container:hover{
+    cursor: grab;
+}
 .picturesWrapper{
     display: grid;
     grid-auto-flow: column;

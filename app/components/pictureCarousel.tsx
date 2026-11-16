@@ -18,7 +18,6 @@ export function PictureCarousel(){
     const dx = useRef(0)
     
     useEffect(()=>{
-        
         if(!container.current)return
         
         const AC = new AbortController()
@@ -98,6 +97,8 @@ export function PictureCarousel(){
         <div 
         ref={container}
         className={styles.container}
+        onMouseDown={()=>{if(container.current)container.current.style.cursor='grabbing'}}
+        onMouseUp={()=>{if(container.current)container.current.style.cursor='grab'}}
         >
             <div 
             ref={picturesWrapper}
