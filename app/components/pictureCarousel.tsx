@@ -5,7 +5,13 @@ import styles from "./carouselStyles.module.css";
 
 import { useResizeObserver } from "./useResizeObserver";
 
-export function PictureCarousel(){
+interface Props{
+    pictures: {
+        src: string
+        alt: string
+    }[]
+}
+export function PictureCarousel({pictures}:Props){
     
     const rafId = useRef<number|null>(null)
     const container = useRef<HTMLDivElement|null>(null)
@@ -16,12 +22,6 @@ export function PictureCarousel(){
 
     const drag = useRef(false)
     const dx = useRef(0)
-
-    const pictures=[
-        {src: '/picture-carousel/dott.svg', alt: 'Black dott'},
-        {src: '/picture-carousel/rect.svg', alt: 'Black rect'},
-        {src: '/picture-carousel/triangle.svg', alt: 'Black triangle'}
-    ]
 
     useEffect(()=>{
         if(!container.current)return
@@ -103,8 +103,6 @@ export function PictureCarousel(){
         <div 
         ref={container}
         className={styles.container}
-        onMouseDown={()=>{if(container.current)container.current.style.cursor='grabbing'}}
-        onMouseUp={()=>{if(container.current)container.current.style.cursor='grab'}}
         >
             <div 
             ref={picturesWrapper}

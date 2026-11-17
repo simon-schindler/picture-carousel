@@ -1,9 +1,13 @@
 .container{
     width: 100%;
     overflow-x: hidden;
+    touch-action: pan-y;
 }
 .container:hover{
     cursor: grab;
+}
+.container:active{
+    cursor: grabbing;
 }
 .picturesWrapper{
     display: grid;
