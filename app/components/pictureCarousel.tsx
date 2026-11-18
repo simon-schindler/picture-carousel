@@ -76,14 +76,19 @@ export function PictureCarousel({pictures}:Props){
             const factorA = 1 - Math.exp(-5.0*dt)
             const factorB = Math.exp(-2.0*dt)
 
+            //auto
+            const factorC = Math.exp(-150*dt)
+            input -= drag.current ?  0 : factorC 
+
             //lerp
             drag.current ?
                 input += (dx.current - input)*factorA :
                 input*= factorB
             
             dx.current = 0
+        
+            x-= input 
 
-            x-= input
             const w = width.current??0
             const translateX = -((x % w) + w) % w // 0 bis -width
             picturesWrapper.current!.style.transform = `translateX(${translateX}px)`
