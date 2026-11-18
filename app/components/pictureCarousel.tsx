@@ -77,7 +77,7 @@ export function PictureCarousel({pictures}:Props){
             const factorB = Math.exp(-2.0*dt)
 
             //auto
-            const factorC = Math.exp(-150*dt)
+            const factorC = Math.exp(-170*dt)
             input -= drag.current ?  0 : factorC 
 
             //lerp
